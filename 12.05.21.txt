@@ -1,0 +1,234 @@
+#include <iostream>
+using namespace std;
+
+//определение класса
+class Student
+{
+public:
+	//ФИО
+	char name[21];
+	//оценки
+	int marks[3];
+	//вычисление среднего балла
+	double getAver()
+	{
+		double sum = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			sum = sum + marks[i];
+		}
+		return sum / 3;
+	}
+};
+
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	//создаем объект от класса Student
+	Student student;
+	cout << "Успеваемость студента.\n\n";
+
+	//присвоение значений объекту
+	strcpy_s(student.name, 20, "Петров А.И");
+	student.marks[0] = 10;
+	student.marks[1] = 9;
+	student.marks[2] = 9;
+
+	//получение значений объекту
+
+
+	cout << "Средный балл " << student.name
+		<< " : " << student.getAver();
+
+	return 0;
+}
+
+
+
+
+===============================================
+#include <iostream>
+using namespace std;
+
+//определение класса
+class Student
+{
+public:
+	//ФИО
+	char name[21];
+	//оценки
+	int marks[3];
+	//вычисление среднего балла
+	double getAver();
+};
+
+double Student::getAver()
+{
+	double sum = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		sum = sum + marks[i];
+	}
+	return sum / 3;
+}
+
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	//создаем массив объектов от класса Student
+	
+	//тип имя_массива [размер_массива];
+
+	Student students[3];
+
+	students[0].marks[0] = 5;
+	students[0].marks[1] = 3;
+	students[0].marks[2] = 4;
+
+
+	return 0;
+}
+
+
+==========================================================================
+Student.h
+#pragma once
+//определение класса
+class Student
+{
+public:
+	//ФИО
+	char name[21];
+	//оценки
+	int marks[3];
+	//вычисление среднего балла
+	double getAver();
+};
+
+
+Student.cpp
+#include <iostream>
+#include "Student.h"
+using namespace std;
+
+double Student::getAver()
+{
+	double sum = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		sum = sum + marks[i];
+	}
+	return sum / 3;
+}
+
+
+StudentGrades.cpp(int main())
+#include <iostream>
+#include "Student.h"
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	//создаем объект от класса Student
+	Student student;
+	cout << "Успеваемость студента.\n\n";
+
+	//присвоение значений объекту
+	strcpy_s(student.name, 20, "Петров А.И");
+	student.marks[0] = 10;
+	student.marks[1] = 9;
+	student.marks[2] = 9;
+
+	//получение значений объекту
+	cout << "Средный балл " << student.name
+		<< " : " << student.getAver();
+
+	return 0;
+}
+
+
+=======================================================================
+Student.h
+#pragma once
+//определение класса
+class Student
+{
+private:
+	//ФИО
+	char name[21];
+	//оценки
+	int marks[3];
+
+public:
+	//set
+	void setName(const char* studentName)
+	{
+		strcpy_s(name, 20, studentName);
+	}
+	const char* getName()
+	{
+		return name;
+	}
+
+	void setMarks(int mark[3])
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			marks[i] = mark[i];
+		}
+	}
+	int getMarks(int index)
+	{
+		return marks[index];
+	}
+
+
+
+	//вычисление среднего балла
+	double getAver();
+};
+
+Student.cpp
+#include <iostream>
+#include "Student.h"
+using namespace std;
+
+double Student::getAver()
+{
+	double sum = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		sum = sum + marks[i];
+	}
+	return sum / 3;
+}
+
+StudentGrades.cpp
+#include <iostream>
+#include "Student.h"
+using namespace std;
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+
+	//создаем объект от класса Student
+	Student student;
+	cout << "Успеваемость студента.\n\n";
+
+	int marks[3] = { 5,4,4 };
+	//присвоение значений объекту
+	student.setName("Петров А.И");
+	student.setMarks(marks);
+
+	//получение значений объекту
+	cout << "Средный балл " << student.getName()
+		<< " : " << student.getAver();
+
+
+	return 0;
+}
